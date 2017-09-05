@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MegaKit_1.0</string>
+    <string name="insert">Insert</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="error">Error</string>
+    <string name="tab_1">Авто</string>
+    <string name="tab_2">Владельцы</string>
+</resources>
