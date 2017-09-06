@@ -6,4 +6,27 @@
     <string name="error">Error</string>
     <string name="tab_1">Авто</string>
     <string name="tab_2">Владельцы</string>
+    <string name="edit_button">Редактировать</string>
+    <string name="plate">Номер:</string>
+    <string name="year">Год:</string>
+    <string name="price">Цена:</string>
+    <string name="owner">Владелец:</string>
+    <string name="model">Модель:</string>
+    <string name="in_table_with_id">записи в таблице с id</string>
+    <string name="i_want">Я хочу</string>
+    <string name="number">Hомер:</string>
+    <string name="done">Готово</string>
+    <string name="id_owner">id владельца:</string>
+    <string-array name="CRUDList">
+        <item>Найти</item>
+        <item>Добавить</item>
+        <item>Изменить</item>
+        <item>Удалить</item>
+    </string-array>
+    <string-array name="operationList">
+        <item> = </item>
+        <item> > </item>
+        <item> &lt; </item>
+
+    </string-array>
 </resources>
