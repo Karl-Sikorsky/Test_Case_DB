@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -121,66 +122,99 @@ public class DialogFragmentEditTable extends android.app.DialogFragment implemen
     }
 
     public void onClick(View v) {
-
-        String queryAll = "";
-        HashMap params = new HashMap< String, String>();
-        queryAll = queryAll + "operation id = " + String.valueOf(spinnerCRUD.getSelectedItemPosition()) + " parameters is: \n ";
-        if(!editTextID.getText().toString().equals("")){
-            queryAll = queryAll + " id " + spinnerID.getSelectedItem().toString() + " " + editTextID.getText().toString() + "\n";
-            if((spinnerCRUD.getSelectedItemPosition()==ITEM_ADD)||(CHANGE_APPLY)){params.put("_id",editTextID.getText().toString());}
-            else{params.put("_id ",spinnerID.getSelectedItem().toString() + " " + editTextID.getText().toString());}
-        }
-        if(!editTextModel.getText().toString().equals("")){
-            queryAll = queryAll + " Model " + spinnerModel.getSelectedItem().toString() + " " + editTextModel.getText().toString() + "\n";
-            if((spinnerCRUD.getSelectedItemPosition()==ITEM_ADD)||(CHANGE_APPLY)){params.put("model",editTextModel.getText().toString());}
-            else{params.put("model ",spinnerModel.getSelectedItem().toString() + " " + editTextModel.getText().toString());}
-        }
-        if(!editTextNumber.getText().toString().equals("")){
-            queryAll = queryAll + " Number " + spinnerNumber.getSelectedItem().toString() + " " + editTextNumber.getText() + "\n";
-            if((spinnerCRUD.getSelectedItemPosition()==ITEM_ADD)||(CHANGE_APPLY)){params.put("number",editTextNumber.getText().toString());}
-            else{params.put("number ",spinnerNumber.getSelectedItem().toString() + " " + editTextNumber.getText().toString());}
-        }
-        if(!editTextOwner.getText().toString().equals("")){
-            queryAll = queryAll + " Owner " + spinnerOwner.getSelectedItem().toString() + " " + editTextOwner.getText() + "\n";
-            if((spinnerCRUD.getSelectedItemPosition()==ITEM_ADD)||(CHANGE_APPLY)){params.put("owner",editTextOwner.getText().toString());}
-            else{params.put("owner ",spinnerOwner.getSelectedItem().toString() + " " + editTextOwner.getText().toString());}
-        }
-        if(!editTextYear.getText().toString().equals("")){
-            queryAll = queryAll + " Year " + spinnerYear.getSelectedItem().toString() + " " + editTextYear.getText() + "\n";
-            if((spinnerCRUD.getSelectedItemPosition()==ITEM_ADD)||(CHANGE_APPLY)){params.put("year",editTextYear.getText().toString());}
-            else{params.put("year ",spinnerYear.getSelectedItem().toString() + " " + editTextYear.getText().toString());}
-        }
-        if(!editTextPrice.getText().toString().equals("")){
-            queryAll = queryAll + " Price " + spinnerPrice.getSelectedItem().toString() + " " + editTextPrice.getText() + "\n";
-            if((spinnerCRUD.getSelectedItemPosition()==ITEM_ADD)||(CHANGE_APPLY)){params.put("price",editTextPrice.getText().toString());}
-            else{ params.put("price ",spinnerPrice.getSelectedItem().toString() + " " + editTextPrice.getText().toString());}
-        }
-        Log.d(LOG_TAG, queryAll);
-
-        if(spinnerCRUD.getSelectedItemPosition()==ITEM_CHANGE){
-         tvCRUD.setVisibility(View.GONE);
-            tvID.setText("Введите новые даные для редактированых записей ");
-            spinnerCRUD.setVisibility(View.GONE);
-            spinnerID.setVisibility(View.GONE);
-            editTextID.setVisibility(View.GONE);
-            editTextModel.setText("");
-            editTextYear.setText("");
-            editTextOwner.setText("");
-            editTextNumber.setText("");
-            editTextPrice.setText("");
-            if(CHANGE_APPLY){
-                mListener.onDialogDoneClickUpdate(DialogFragmentEditTable.this, spinnerCRUD.getSelectedItemPosition(),dataBeforeUpdate, params);
-            dismiss();
+        if(checkDataValid()) {
+            String queryAll = "";
+            HashMap params = new HashMap<String, String>();
+            queryAll = queryAll + "operation id = " + String.valueOf(spinnerCRUD.getSelectedItemPosition()) + " parameters is: \n ";
+            if (!editTextID.getText().toString().equals("")) {
+                queryAll = queryAll + " id " + spinnerID.getSelectedItem().toString() + " " + editTextID.getText().toString() + "\n";
+                if ((spinnerCRUD.getSelectedItemPosition() == ITEM_ADD) || (CHANGE_APPLY)) {
+                    params.put("_id", editTextID.getText().toString());
+                } else {
+                    params.put("_id ", spinnerID.getSelectedItem().toString() + " " + editTextID.getText().toString());
+                }
             }
-            CHANGE_APPLY = true;
-            dataBeforeUpdate = new HashMap<String, String>(params);
+            if (!editTextModel.getText().toString().equals("")) {
+                queryAll = queryAll + " Model " + spinnerModel.getSelectedItem().toString() + " " + editTextModel.getText().toString() + "\n";
+                if ((spinnerCRUD.getSelectedItemPosition() == ITEM_ADD) || (CHANGE_APPLY)) {
+                    params.put("model", editTextModel.getText().toString());
+                } else {
+                    params.put("model ", spinnerModel.getSelectedItem().toString() + " '" + editTextModel.getText().toString()+"'");
+                }
+            }
+            if (!editTextNumber.getText().toString().equals("")) {
+                queryAll = queryAll + " Number " + spinnerNumber.getSelectedItem().toString() + " " + editTextNumber.getText() + "\n";
+                if ((spinnerCRUD.getSelectedItemPosition() == ITEM_ADD) || (CHANGE_APPLY)) {
+                    params.put("number", editTextNumber.getText().toString());
+                } else {
+                    params.put("number ", spinnerNumber.getSelectedItem().toString() + " '" + editTextNumber.getText().toString()+"'");
+                }
+            }
+            if (!editTextOwner.getText().toString().equals("")) {
+                queryAll = queryAll + " Owner " + spinnerOwner.getSelectedItem().toString() + " " + editTextOwner.getText() + "\n";
+                if ((spinnerCRUD.getSelectedItemPosition() == ITEM_ADD) || (CHANGE_APPLY)) {
+                    params.put("owner", editTextOwner.getText().toString());
+                } else {
+                    params.put("owner ", spinnerOwner.getSelectedItem().toString() + " " + editTextOwner.getText().toString());
+                }
+            }
+            if (!editTextYear.getText().toString().equals("")) {
+                queryAll = queryAll + " Year " + spinnerYear.getSelectedItem().toString() + " " + editTextYear.getText() + "\n";
+                if ((spinnerCRUD.getSelectedItemPosition() == ITEM_ADD) || (CHANGE_APPLY)) {
+                    params.put("year", editTextYear.getText().toString());
+                } else {
+                    params.put("year ", spinnerYear.getSelectedItem().toString() + " " + editTextYear.getText().toString());
+                }
+            }
+            if (!editTextPrice.getText().toString().equals("")) {
+                queryAll = queryAll + " Price " + spinnerPrice.getSelectedItem().toString() + " " + editTextPrice.getText() + "\n";
+                if ((spinnerCRUD.getSelectedItemPosition() == ITEM_ADD) || (CHANGE_APPLY)) {
+                    params.put("price", editTextPrice.getText().toString());
+                } else {
+                    params.put("price ", spinnerPrice.getSelectedItem().toString() + " " + editTextPrice.getText().toString());
+                }
+            }
+            Log.d(LOG_TAG, queryAll);
 
+            if (spinnerCRUD.getSelectedItemPosition() == ITEM_CHANGE) {
+                tvCRUD.setVisibility(View.GONE);
+                tvID.setText("Введите новые даные для редактированых записей ");
+                spinnerCRUD.setVisibility(View.GONE);
+                spinnerID.setVisibility(View.GONE);
+                editTextID.setVisibility(View.GONE);
+                editTextModel.setText("");
+                editTextYear.setText("");
+                editTextOwner.setText("");
+                editTextNumber.setText("");
+                editTextPrice.setText("");
+                if (CHANGE_APPLY) {
+                    mListener.onDialogDoneClickUpdate(DialogFragmentEditTable.this, spinnerCRUD.getSelectedItemPosition(), dataBeforeUpdate, params);
+                    dismiss();
+                }
+                CHANGE_APPLY = true;
+                dataBeforeUpdate = new HashMap<String, String>(params);
+
+            } else {
+
+                mListener.onDialogDoneClick(DialogFragmentEditTable.this, spinnerCRUD.getSelectedItemPosition(), params);
+
+
+                dismiss();
+            }
         }else{
+            Toast.makeText(getActivity().getApplicationContext(),"ПРОВЕРЬТЕ ПРАВИЛЬНОСТЬ ВВЕДЕННЫХ ДАННЫХ",Toast.LENGTH_SHORT).show();
+        }
+    }
 
-        mListener.onDialogDoneClick(DialogFragmentEditTable.this, spinnerCRUD.getSelectedItemPosition(), params);
+    private boolean checkDataValid() {
+        boolean isValid = true;
 
+        if(!(String.valueOf(editTextID.getText()).matches("[-+]?\\d+")||editTextID.getText().toString().equals(""))){editTextID.setText("!");isValid=false;}
+        if(!(String.valueOf(editTextYear.getText()).matches("[-+]?\\d+")||editTextYear.getText().toString().equals(""))){editTextYear.setText("!");isValid=false;}
+        if(!(String.valueOf(editTextPrice.getText()).matches("[-+]?\\d+")||editTextPrice.getText().toString().equals(""))){editTextPrice.setText("!");isValid=false;}
+        if(!(String.valueOf(editTextOwner.getText()).matches("[-+]?\\d+")||editTextOwner.getText().toString().equals(""))){editTextOwner.setText("!");isValid=false;}
 
-        dismiss();}
+        return isValid;
     }
 
     public void onDismiss(DialogInterface dialog) {

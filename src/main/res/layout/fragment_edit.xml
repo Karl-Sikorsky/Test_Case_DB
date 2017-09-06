@@ -64,17 +64,15 @@
 
     <EditText
         android:id="@+id/editTextID"
-        android:layout_width="140dp"
+        android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginBottom="-28dp"
+        android:layout_marginEnd="8dp"
+
+        android:layout_marginLeft="-32dp"
         android:ems="10"
         android:inputType="textPersonName"
-
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/spinnerID"
-        android:layout_marginBottom="0dp"
-        android:layout_marginLeft="0dp"
         app:layout_constraintLeft_toLeftOf="@+id/editTextNumber" />
 
     <TextView

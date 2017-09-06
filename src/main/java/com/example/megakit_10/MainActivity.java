@@ -206,11 +206,12 @@ public void redrawList(){
                Uri newUri = null;
                if(CURRENT_URI==CARS_URI){
                    ContentValues cv = new ContentValues();
-                   cv.put(CARS_NUMBER, params.get(CARS_NUMBER));
-                   cv.put(CARS_OWNER, Integer.parseInt(params.get(CARS_OWNER)));
-                   cv.put(CARS_MODEL, params.get(CARS_MODEL));
-                   cv.put(CARS_YEAR, Integer.parseInt(params.get(CARS_YEAR)));
-                   cv.put(CARS_PRICE, Integer.parseInt(params.get(CARS_PRICE)));
+
+                   if(params.containsKey(CARS_NUMBER))cv.put(CARS_NUMBER, params.get(CARS_NUMBER));
+                   if(params.containsKey(CARS_OWNER))cv.put(CARS_OWNER, Integer.parseInt(params.get(CARS_OWNER)));
+                   if(params.containsKey(CARS_MODEL))cv.put(CARS_MODEL, params.get(CARS_MODEL));
+                   if(params.containsKey(CARS_YEAR))cv.put(CARS_YEAR, Integer.parseInt(params.get(CARS_YEAR)));
+                   if(params.containsKey(CARS_PRICE))cv.put(CARS_PRICE, Integer.parseInt(params.get(CARS_PRICE)));
 
 
 
@@ -264,12 +265,12 @@ public void redrawList(){
 
         if(CURRENT_URI==CARS_URI){
             ContentValues cv = new ContentValues();
-            cv.put(CARS_NUMBER, paramsTo.get(CARS_NUMBER));
-            Log.d(LOG_TAG,paramsTo.get(CARS_NUMBER));
-            cv.put(CARS_OWNER, Integer.parseInt(paramsTo.get(CARS_OWNER)));
-            cv.put(CARS_MODEL, paramsTo.get(CARS_MODEL));
-            cv.put(CARS_YEAR, Integer.parseInt(paramsTo.get(CARS_YEAR)));
-            cv.put(CARS_PRICE, Integer.parseInt(paramsTo.get(CARS_PRICE)));
+            if(paramsTo.containsKey(CARS_NUMBER))cv.put(CARS_NUMBER, paramsTo.get(CARS_NUMBER));
+
+            if(paramsTo.containsKey(CARS_OWNER))cv.put(CARS_OWNER, Integer.parseInt(paramsTo.get(CARS_OWNER)));
+            if(paramsTo.containsKey(CARS_MODEL))cv.put(CARS_MODEL, paramsTo.get(CARS_MODEL));
+            if(paramsTo.containsKey(CARS_YEAR))cv.put(CARS_YEAR, Integer.parseInt(paramsTo.get(CARS_YEAR)));
+            if(paramsTo.containsKey(CARS_PRICE))cv.put(CARS_PRICE, Integer.parseInt(paramsTo.get(CARS_PRICE)));
 
             String SELECTION = "";
 

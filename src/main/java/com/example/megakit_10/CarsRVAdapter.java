@@ -17,10 +17,10 @@ import java.util.List;
 
 public class CarsRVAdapter extends CursorRecyclerViewAdapter<CarsRVAdapter.CarsViewHolder>{
 
-
+    Context context;
     CarsRVAdapter(Context context, Cursor cursor){
         super(context,cursor);
-
+      this.context = context;
     }
 
     @Override
@@ -33,12 +33,12 @@ public class CarsRVAdapter extends CursorRecyclerViewAdapter<CarsRVAdapter.CarsV
     @Override
     public void onBindViewHolder(CarsViewHolder holder, Cursor cursor) {
         Auto myItem = Auto.fromCursor(cursor);
-        holder.carId.setText(String.valueOf(myItem.getId()));
-        holder.carNumber.setText(myItem.getNumber());
-        holder.carPrice.setText(String.valueOf(myItem.getPrice()));
-        holder.carYear.setText(String.valueOf(myItem.getYear()));
-        holder.carModel.setText(myItem.getModel());
-        holder.carOwner.setText(myItem.getOwner());
+        holder.carId.setText(  context.getResources().getText(R.string.id)+String.valueOf(myItem.getId()));
+        holder.carNumber.setText((myItem.getNumber()==null) ? context.getResources().getText(R.string.number)+ "нет данных" : context.getResources().getText(R.string.number)+myItem.getNumber());
+        holder.carPrice.setText((myItem.getPrice()==0) ? context.getResources().getText(R.string.price)+ "нет данных" : context.getResources().getText(R.string.price)+String.valueOf(myItem.getPrice()));
+        holder.carYear.setText((myItem.getYear()==0) ? context.getResources().getText(R.string.year)+ "нет данных" : context.getResources().getText(R.string.year)+String.valueOf(myItem.getYear()));
+        holder.carModel.setText((myItem.getModel()==null) ? context.getResources().getText(R.string.model)+ "нет данных" : context.getResources().getText(R.string.model)+myItem.getModel());
+        holder.carOwner.setText((myItem.getOwner()==0) ? context.getResources().getText(R.string.owner)+ "нет данных" : context.getResources().getText(R.string.owner)+String.valueOf(myItem.getOwner()));
 
     }
 

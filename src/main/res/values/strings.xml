@@ -7,6 +7,7 @@
     <string name="tab_1">Авто</string>
     <string name="tab_2">Владельцы</string>
     <string name="edit_button">Редактировать</string>
+    <string name="id">id:</string>
     <string name="plate">Номер:</string>
     <string name="year">Год:</string>
     <string name="price">Цена:</string>
@@ -24,9 +25,13 @@
         <item>Удалить</item>
     </string-array>
     <string-array name="operationList">
-        <item> = </item>
-        <item> > </item>
-        <item> &lt; </item>
+        <item>  =  </item>
+        <item>  >  </item>
+        <item>  &lt;  </item>
 
+    </string-array>
+    <string-array name="likeList">
+        <item> like </item>
+        <item> not like </item>
     </string-array>
 </resources>

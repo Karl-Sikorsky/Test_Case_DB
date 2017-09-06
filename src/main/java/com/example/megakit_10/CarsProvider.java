@@ -170,10 +170,7 @@ public class CarsProvider extends ContentProvider{
             default:
                 throw new IllegalArgumentException("Wrong URI: " + uri);
         }
-        //?????? не может создать таблицы, метод не хочет вызываться nullPoinerException
-       /* Log.d(LOG_TAG,"try to call onCreate DBHelper");
-        dbHelper = new DBHelper(getContext());*/
-        //dbHelper.createTables();
+
 
         db = dbHelper.getWritableDatabase();
         Cursor cursor;
@@ -196,9 +193,7 @@ public class CarsProvider extends ContentProvider{
 
     public Uri insert(Uri uri, ContentValues values) {
 
-            /*db = dbHelper.getWritableDatabase();
-            db.execSQL(DB_CARS_DROP);
-            db.execSQL(DB_DRIVERS_DROP);*/
+
 
 
         Log.d(LOG_TAG, "insert, " + uri.toString());
