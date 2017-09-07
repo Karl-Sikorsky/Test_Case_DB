@@ -41,7 +41,7 @@
         android:id="@+id/textViewID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="32dp"
         android:text="@string/in_table_with_id"
         app:layout_constraintTop_toBottomOf="@+id/textViewChooseCRUD"
         android:layout_marginLeft="8dp"
@@ -66,14 +66,16 @@
         android:id="@+id/editTextID"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:layout_marginBottom="-28dp"
+        android:layout_marginBottom="0dp"
         android:layout_marginEnd="8dp"
 
-        android:layout_marginLeft="-32dp"
+        android:layout_marginLeft="0dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="@+id/spinnerID"
-        app:layout_constraintLeft_toLeftOf="@+id/editTextFirstname" />
+        app:layout_constraintLeft_toLeftOf="@+id/editTextFirstname"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCRUD" />
 
     <TextView
         android:id="@+id/textView5"

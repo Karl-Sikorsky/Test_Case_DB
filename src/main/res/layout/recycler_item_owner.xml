@@ -43,8 +43,8 @@
                 android:text="@string/telephon"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="8dp"
-                app:layout_constraintRight_toLeftOf="@+id/guideline"
-                android:layout_marginRight="2dp" />
+                android:layout_marginLeft="48dp"
+                app:layout_constraintLeft_toLeftOf="parent" />
 
             <TextView
                 android:id="@+id/textViewFirstname"

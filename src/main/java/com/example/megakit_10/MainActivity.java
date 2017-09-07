@@ -2,7 +2,10 @@ package com.example.megakit_10;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.app.LoaderManager;
 import android.content.ContentValues;
+import android.content.CursorLoader;
+import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,7 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends Activity implements DialogFragmentEditTableListener {
+public class MainActivity extends Activity implements DialogFragmentEditTableListener, LoaderManager.LoaderCallbacks<Cursor> {
 
     final String LOG_TAG = "myLogs";
 
@@ -91,6 +94,7 @@ public class MainActivity extends Activity implements DialogFragmentEditTableLis
         cursor_RV = getContentResolver().query(CARS_URI, null, null,
                 null, null);
 
+        getLoaderManager().initLoader(0, null, this);
 
 
 
@@ -360,5 +364,20 @@ public void redrawList(){
             adapterOwners.swapCursor(cursor_RV_Owners);
         }
 
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        return new CursorLoader(this,CURRENT_URI,null,null,null,null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+     adapter.swapCursor(cursor);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+    adapter.swapCursor(null);
     }
 }
