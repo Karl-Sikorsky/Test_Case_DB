@@ -18,7 +18,7 @@
         </activity>
 
         <provider
-            android:name=".CarsProvider"
+            android:name=".CarsAndOwnersProvider"
             android:authorities="com.example.megakit_10.carsbase"
             android:enabled="true"
             android:exported="true"></provider>

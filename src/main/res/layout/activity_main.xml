@@ -27,68 +27,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-
-                    <LinearLayout
+                    <Button
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <Button
-                            android:id="@+id/btnInsert"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:onClick="onClickInsert"
-                            android:text="@string/insert">
-                        </Button>
-                        <Button
-                            android:id="@+id/btnUpdate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:onClick="onClickUpdate"
-                            android:text="@string/update">
-                        </Button>
-                        <Button
-                            android:id="@+id/btnDelete"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:onClick="onClickDelete"
-                            android:text="@string/delete">
-                        </Button>
-                        <Button
-                            android:id="@+id/btnError"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:onClick="onClickError"
-                            android:text="@string/error">
-                        </Button>
-
-
-                    </LinearLayout>
-                    <EditText
-                        android:id="@+id/editText"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/buttonEditOwners"
+                        android:onClick="onClickEditOwners"
+                        android:text="@string/edit_button"/>
+                    <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <ListView
-                            android:id="@+id/lvContact"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
+                        android:layout_height="match_parent"
+                        android:id="@+id/recyclerViewOwners">
+                    </android.support.v7.widget.RecyclerView>
 
 
-                        </ListView>
-
-                        <ListView
-                            android:id="@+id/lvDrivers"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-
-                        </ListView>
-
-                    </LinearLayout>
 
                 </LinearLayout>
                 <LinearLayout
@@ -100,7 +51,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/buttonEdit"
-                        android:onClick="onClickEdit"
+                        android:onClick="onClickEditCars"
                         android:text="@string/edit_button"/>
                     <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"

@@ -18,6 +18,11 @@
     <string name="number">Hомер:</string>
     <string name="done">Готово</string>
     <string name="id_owner">id владельца:</string>
+    <string name="telephon">Телефон:</string>
+    <string name="firstname">Имя:</string>
+    <string name="lastname">Фамилия:</string>
+    <string name="age">Возраст:</string>
+    <string name="mail">Почта:</string>
     <string-array name="CRUDList">
         <item>Найти</item>
         <item>Добавить</item>

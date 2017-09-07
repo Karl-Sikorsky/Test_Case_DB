@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
-
 /**
  * Created by ПОДАРУНКОВИЙ on 05.09.2017.
  */
@@ -25,14 +23,14 @@ public class CarsRVAdapter extends CursorRecyclerViewAdapter<CarsRVAdapter.CarsV
 
     @Override
     public CarsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item_car, parent, false);
         CarsViewHolder cvh = new CarsViewHolder(v);
         return cvh;
     }
 
     @Override
     public void onBindViewHolder(CarsViewHolder holder, Cursor cursor) {
-        Auto myItem = Auto.fromCursor(cursor);
+        Car myItem = Car.fromCursor(cursor);
         holder.carId.setText(  context.getResources().getText(R.string.id)+String.valueOf(myItem.getId()));
         holder.carNumber.setText((myItem.getNumber()==null) ? context.getResources().getText(R.string.number)+ "нет данных" : context.getResources().getText(R.string.number)+myItem.getNumber());
         holder.carPrice.setText((myItem.getPrice()==0) ? context.getResources().getText(R.string.price)+ "нет данных" : context.getResources().getText(R.string.price)+String.valueOf(myItem.getPrice()));

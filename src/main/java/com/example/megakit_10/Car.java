@@ -6,7 +6,7 @@ import android.database.Cursor;
  * Created by ПОДАРУНКОВИЙ on 05.09.2017.
  */
 
-public class Auto {
+public class Car {
 int id;
     String number;
     int owner_id;
@@ -14,10 +14,10 @@ int id;
     int year;
     int price;
 
-    public static Auto fromCursor(Cursor cursor) {
+    public static Car fromCursor(Cursor cursor) {
 
 
-        Auto item = new Auto(cursor.getInt(cursor.getColumnIndex("_id")));
+        Car item = new Car(cursor.getInt(cursor.getColumnIndex("_id")));
         item.setNumber(cursor.getString(cursor.getColumnIndex("number")));
         item.setOwner(cursor.getInt(cursor.getColumnIndex("owner")));
         item.setModel(cursor.getString(cursor.getColumnIndex("model")));
@@ -44,7 +44,7 @@ int id;
         this.number = number;
     }
 
-    public Auto(int id) {
+    public Car(int id) {
         number = "Number";
         owner_id = 0;
         model = "Model";
@@ -85,7 +85,7 @@ int id;
         this.price = price;
     }
 
-    public Auto(int id, String number, int owner, String model, int year, int price) {
+    public Car(int id, String number, int owner, String model, int year, int price) {
 
         this.id = id;
         this.number = number;

@@ -16,11 +16,11 @@ import android.util.Log;
  * Created by Kalevych_tech@ukr.net on 05.09.2017.
  */
 
-public class CarsProvider extends ContentProvider{
+public class CarsAndOwnersProvider extends ContentProvider{
     final String LOG_TAG = "myLogs";
 
     // Создаем константы для БД
-    static final String DB_NAME = "dbCarsAndOwners";
+    static final String DB_NAME = "CarsOwnersDB";
     static final int DB_VERSION = 1;
 
     // Таблицы автомобилей и владельцев
@@ -40,7 +40,7 @@ public class CarsProvider extends ContentProvider{
     static final String OWNERS_ID = "_id";
     static final String OWNERS_FIRST_NAME = "firstname";
     static final String OWNERS_AGE = "age";
-    static final String OWNERS_LAST_NAME = "last_name";
+    static final String OWNERS_LAST_NAME = "lastname";
     static final String OWNERS_TELEPHONE = "telephone";
     static final String OWNERS_MAIL = "mail";
 
@@ -59,20 +59,20 @@ public class CarsProvider extends ContentProvider{
     // Скрипт создания таблицы автомобилей
     static final String DB_CARS_CREATE = "create table " + CARS_TABLE + "("
             + CARS_ID + " integer primary key autoincrement, "
-            + CARS_NUMBER + " text, " + CARS_OWNER + " integer, "
-            + CARS_YEAR + " integer, "
-            + CARS_PRICE + " integer, " + CARS_IN_ORDER + " boolean, "
-            + CARS_MODEL + " text, foreign key("
+            + CARS_NUMBER + " text default 'нет данных', " + CARS_OWNER + " integer default 0, "
+            + CARS_YEAR + " integer default 0, "
+            + CARS_PRICE + " integer default 0, "
+            + CARS_MODEL + " text default 'нет данных', foreign key("
             + CARS_OWNER + ") references "+ OWNERS_TABLE + "(" + OWNERS_ID + ")" + ");";
 
     // Скрипт создания таблицы владельцев
     static final String DB_OWNERS_CREATE = "create table " + OWNERS_TABLE + "("
             + OWNERS_ID + " integer primary key autoincrement, "
-            + OWNERS_FIRST_NAME + " text, "
-            + OWNERS_LAST_NAME + " text, "
-            + OWNERS_AGE + " integer, "
-            + OWNERS_TELEPHONE + " text, "
-            + OWNERS_MAIL + " text" + ");";
+            + OWNERS_FIRST_NAME + " text default 'нет данных', "
+            + OWNERS_LAST_NAME + " text default 'нет данных', "
+            + OWNERS_AGE + " integer default 0, "
+            + OWNERS_TELEPHONE + " text default 'нет данных', "
+            + OWNERS_MAIL + " text default 'нет данных'" + ");";
 
     //скрипты для удаления таблиц, если потребуется при апдейте
     static final String TABLE_CARS_DROP = "DROP TABLE IF EXISTS " + CARS_TABLE ;
@@ -261,7 +261,11 @@ public class CarsProvider extends ContentProvider{
         getContext().getContentResolver().notifyChange(uri, null);
         return cnt;
     }
-
+   public void dropTables(){
+       db = dbHelper.getWritableDatabase();
+       db.execSQL(TABLE_CARS_DROP);
+       db.execSQL(TABLE_OWNERS_DROP);
+   }
     //функция обновления записи, сначала определяем, где нужно обновить, потом обращаемся к базе
     public int update(Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
@@ -332,7 +336,7 @@ public class CarsProvider extends ContentProvider{
             ContentValues cv2 = new ContentValues();
             for (int i = 1; i <= 3; i++) {
                 cv2.put(OWNERS_FIRST_NAME, "firstname " + i);
-                cv2.put(OWNERS_LAST_NAME, "last_name " + i);
+                cv2.put(OWNERS_LAST_NAME, "lastname " + i);
                 cv2.put(OWNERS_AGE, 20);
                 cv2.put(OWNERS_TELEPHONE, "telephone " + i);
                 cv2.put(OWNERS_MAIL, "mail " + i);
@@ -349,7 +353,7 @@ public class CarsProvider extends ContentProvider{
                 cv.put(CARS_MODEL, "model "+i );
                 cv.put(CARS_YEAR, 2000);
                 cv.put(CARS_PRICE, 100000);
-                cv.put(CARS_IN_ORDER, true);
+
 
                 db.insert(CARS_TABLE, null, cv);
             }
@@ -360,6 +364,7 @@ public class CarsProvider extends ContentProvider{
 
 // возможно когда-нибудь пригодится обновлять саму базу
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
         }
     }
 }
