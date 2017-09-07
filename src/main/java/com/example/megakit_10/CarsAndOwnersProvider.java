@@ -14,6 +14,9 @@ import android.util.Log;
 
 /**
  * Created by Kalevych_tech@ukr.net on 05.09.2017.
+ * Контент провайдер, обе таблицы описаны здесь, все поля, ключи, скрипты
+ * для создания/удаления. Возможно имело смысл создать отдельные классы для
+ * таблиц базы данных, видел, что делают по разному, не уверен, как лучше
  */
 
 public class CarsAndOwnersProvider extends ContentProvider{
@@ -190,7 +193,7 @@ public class CarsAndOwnersProvider extends ContentProvider{
                     OWNERS_CONTENT_URI);}
         return cursor;
     }
-
+//вставка
     public Uri insert(Uri uri, ContentValues values) {
 
 
@@ -261,6 +264,8 @@ public class CarsAndOwnersProvider extends ContentProvider{
         getContext().getContentResolver().notifyChange(uri, null);
         return cnt;
     }
+    //функция для удаления таблиц, в процессе дебага приходилось ею пользоваться, поэтому, возможно,
+    // есть смысл ее оставить, если в будущем придется что-то исправлять
    public void dropTables(){
        db = dbHelper.getWritableDatabase();
        db.execSQL(TABLE_CARS_DROP);
@@ -324,6 +329,7 @@ public class CarsAndOwnersProvider extends ContentProvider{
     }
 
     //клас для работы с базой даных, при создании инициализирует таблицы
+    //при самом первом создании базы забивает базу дефолтными даными, несколько записей
     private class DBHelper extends SQLiteOpenHelper {
 
         public DBHelper(Context context) {

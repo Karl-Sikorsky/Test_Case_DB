@@ -1,7 +1,7 @@
 package com.example.megakit_10;
 
 /**
- * Created by ПОДАРУНКОВИЙ on 06.09.2017.
+ * Created by Kalevych_tech@ukr.net on 06.09.2017.
  */
 
 /*

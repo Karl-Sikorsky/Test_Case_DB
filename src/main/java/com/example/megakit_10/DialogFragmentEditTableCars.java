@@ -15,17 +15,21 @@ import android.widget.Toast;
 import java.util.HashMap;
 
 /**
- * Created by ПОДАРУНКОВИЙ on 06.09.2017.
+ * Created by Kalevych_tech@ukr.net on 06.09.2017.
+ * реализация диалогового окна для редактирования Таблицы Автомобилей
+ *
  */
 
 public class DialogFragmentEditTableCars extends android.app.DialogFragment implements View.OnClickListener {
-
+//Основные константы
     final String LOG_TAG = "myLogs";
     final int ITEM_FIND = 0;
     final int ITEM_ADD = 1;
     final int ITEM_CHANGE = 2;
     final int ITEM_DELETE = 3;
     boolean CHANGE_APPLY;
+    //для метода Update форму записей нужно заполнить дважды -  сначала получить where, потом insert, данные про изменяемые записи
+    //будут храниться в Карте:
     HashMap<String, String> dataBeforeUpdate;
 
     EditText editTextID, editTextModel, editTextNumber, editTextOwner, editTextPrice, editTextYear;
@@ -36,43 +40,35 @@ public class DialogFragmentEditTableCars extends android.app.DialogFragment impl
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        // Verify that the host activity implements the callback interface
+        // удостоверяемся, что активити реализовалась от DialogFragmentEditTableListener
         try {
-            // Instantiate the NoticeDialogListener so we can send events to the host
+
             mListener = (DialogFragmentEditTableListener) activity;
         } catch (ClassCastException e) {
-            // The activity doesn't implement the interface, throw exception
+            // если активити не реализовалась
             throw new ClassCastException(activity.toString()
-                    + " must implement NoticeDialogListener");
+                    + " must implement DialogListener");
         }
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       // String[] data_for_operation = {"Найти", "Добавить", "Изменить", "Удалить"};
-       // String[] data_for_selector = {" = ", " > ", " < ", " >= ", " =< "};
 
-        //getDialog().setTitle("Управление таблицой");
+
+
         View v = inflater.inflate(R.layout.fragment_edit_cars, null);
         v.findViewById(R.id.buttonDone).setOnClickListener(this);
 
         tvCRUD = (TextView)v.findViewById(R.id.textViewChooseCRUD);
         tvID = (TextView)v.findViewById(R.id.textViewID) ;
 
-        //ArrayAdapter<String> adapter_CRUD_spinner = new ArrayAdapter<String>(getActivity().getApplicationContext(), simple_spinner_item, data_for_operation);
-        //adapter_CRUD_spinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+          //спиннер выбора операции (удаление, поиск, вставка...
         spinnerCRUD = (Spinner)v.findViewById(R.id.spinnerCRUD);
-        //spinnerCRUD.setAdapter(adapter_CRUD_spinner);
-        //spinnerCRUD.setPrompt("выберите пункт");
-        //spinnerCRUD.setSelection(1, true);
-        //spinnerCRUD.setPromptId(3);
+        //переменная, которая просигнализирует диалог о том, что данные "каким записям делать апдейт" в случае Update уже заполнены
         CHANGE_APPLY = false;
 
-        //ArrayAdapter<String> adapter_select_spinner = new ArrayAdapter<String>(getActivity().getApplicationContext(), simple_spinner_item, data_for_selector);
-        //adapter_select_spinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        //List<Spinner> spinners_selector = new ArrayList<>();
         spinnerID = ((Spinner)v.findViewById(R.id.spinnerID));
         spinnerModel = ((Spinner)v.findViewById(R.id.spinnerModel));
         spinnerNumber = ((Spinner)v.findViewById(R.id.spinnerNumber));
@@ -87,38 +83,20 @@ public class DialogFragmentEditTableCars extends android.app.DialogFragment impl
         editTextPrice = (EditText)v.findViewById(R.id.editTextPrice);
         editTextYear = (EditText)v.findViewById(R.id.editTextYear);
 
-
-
-
-        // устанавливаем обработчик нажатия
-       /* spinnerCRUD.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                // показываем позиция нажатого элемента
-                spinnerCRUD.setSelection(position);
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });*/
-
-
-
-
         return v;
     }
 
     public void onClick(View v) {
+        //проверяем, правильно ли введены данные (например, если в поле для числа ввели символы, то убедим пользователя
+        //ввести данные корректно
         if(checkDataValid()) {
-            //String queryAll = "";
+            //параметры запроса собираем из формы, отправляем в Активити, и оттуда дергаем Базу Данных
             HashMap params = new HashMap<String, String>();
-            //queryAll = queryAll + "operation id = " + String.valueOf(spinnerCRUD.getSelectedItemPosition()) + " parameters is: \n ";
+
+            //Здесь много boilerplate кода, нам нужно для каждого поля ввода обработать данные, чтоб отправить их в запрос
+            //банально не успел придумать, как это все расфасовать по списках и обработать циклом
             if (!editTextID.getText().toString().equals("")) {
-                //queryAll = queryAll + " id " + spinnerID.getSelectedItem().toString() + " " + editTextID.getText().toString() + "\n";
+
                 if ((spinnerCRUD.getSelectedItemPosition() == ITEM_ADD) || (CHANGE_APPLY)) {
                     params.put("_id", editTextID.getText().toString());
                 } else {
@@ -126,7 +104,7 @@ public class DialogFragmentEditTableCars extends android.app.DialogFragment impl
                 }
             }
             if (!editTextModel.getText().toString().equals("")) {
-                //queryAll = queryAll + " Model " + spinnerModel.getSelectedItem().toString() + " " + editTextModel.getText().toString() + "\n";
+
                 if ((spinnerCRUD.getSelectedItemPosition() == ITEM_ADD) || (CHANGE_APPLY)) {
                     params.put("model", editTextModel.getText().toString());
                 } else {
@@ -134,7 +112,7 @@ public class DialogFragmentEditTableCars extends android.app.DialogFragment impl
                 }
             }
             if (!editTextNumber.getText().toString().equals("")) {
-                //queryAll = queryAll + " Number " + spinnerNumber.getSelectedItem().toString() + " " + editTextNumber.getText() + "\n";
+
                 if ((spinnerCRUD.getSelectedItemPosition() == ITEM_ADD) || (CHANGE_APPLY)) {
                     params.put("number", editTextNumber.getText().toString());
                 } else {
@@ -142,7 +120,7 @@ public class DialogFragmentEditTableCars extends android.app.DialogFragment impl
                 }
             }
             if (!editTextOwner.getText().toString().equals("")) {
-               // queryAll = queryAll + " Owner " + spinnerOwner.getSelectedItem().toString() + " " + editTextOwner.getText() + "\n";
+
                 if ((spinnerCRUD.getSelectedItemPosition() == ITEM_ADD) || (CHANGE_APPLY)) {
                     params.put("owner", editTextOwner.getText().toString());
                 } else {
@@ -150,7 +128,7 @@ public class DialogFragmentEditTableCars extends android.app.DialogFragment impl
                 }
             }
             if (!editTextYear.getText().toString().equals("")) {
-                //queryAll = queryAll + " Year " + spinnerYear.getSelectedItem().toString() + " " + editTextYear.getText() + "\n";
+
                 if ((spinnerCRUD.getSelectedItemPosition() == ITEM_ADD) || (CHANGE_APPLY)) {
                     params.put("year", editTextYear.getText().toString());
                 } else {
@@ -158,15 +136,17 @@ public class DialogFragmentEditTableCars extends android.app.DialogFragment impl
                 }
             }
             if (!editTextPrice.getText().toString().equals("")) {
-                //queryAll = queryAll + " Price " + spinnerPrice.getSelectedItem().toString() + " " + editTextPrice.getText() + "\n";
+
                 if ((spinnerCRUD.getSelectedItemPosition() == ITEM_ADD) || (CHANGE_APPLY)) {
                     params.put("price", editTextPrice.getText().toString());
                 } else {
                     params.put("price ", spinnerPrice.getSelectedItem().toString() + " " + editTextPrice.getText().toString());
                 }
             }
-           // Log.d(LOG_TAG, queryAll);
 
+                //изменяем внешний вид формы, если мы редактируем данные:
+            // мы считали данные, какие записи изменять
+            //теперь считываем данные, какие значения заносить в выбраные записи
             if (spinnerCRUD.getSelectedItemPosition() == ITEM_CHANGE) {
                 tvCRUD.setVisibility(View.GONE);
                 tvID.setText("Введите новые даные для редактированых записей ");
@@ -179,6 +159,7 @@ public class DialogFragmentEditTableCars extends android.app.DialogFragment impl
                 editTextNumber.setText("");
                 editTextPrice.setText("");
                 if (CHANGE_APPLY) {
+                    //отправляем параметры запроса в Активити
                     mListener.onDialogDoneClickUpdate(DialogFragmentEditTableCars.this, spinnerCRUD.getSelectedItemPosition(), dataBeforeUpdate, params);
                     dismiss();
                 }
@@ -186,13 +167,14 @@ public class DialogFragmentEditTableCars extends android.app.DialogFragment impl
                 dataBeforeUpdate = new HashMap<String, String>(params);
 
             } else {
-
+                  //отправляем параметры запроса в Активити
                 mListener.onDialogDoneClick(DialogFragmentEditTableCars.this, spinnerCRUD.getSelectedItemPosition(), params);
 
 
                 dismiss();
             }
         }else{
+            //если валидация не пройдена
             Toast.makeText(getActivity().getApplicationContext(),"ПРОВЕРЬТЕ ПРАВИЛЬНОСТЬ ВВЕДЕННЫХ ДАННЫХ",Toast.LENGTH_SHORT).show();
         }
     }

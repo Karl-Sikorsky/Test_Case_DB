@@ -10,7 +10,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- * Created by ПОДАРУНКОВИЙ on 07.09.2017.
+ * Created by Kalevych_tech@ukr.net on 07.09.2017.
+ * Адаптер для списка. Так как данные нужно обновлять в связке с курсором, стандартный ListView
+ * позволяет это делать через SimpleCursorAdapter (там в параметрах есть курсор), для RecyclerView
+ * такой функционал в стандартной реализации недоступен, поэтому пришлось унаследоваться от класса,
+ * найденого на StackOverflow, это потенциально лучшее решение (ну или самое простое) для отображения
+ * даных с БД в RecyclerView
  */
 
 public class OwnersRVAdapter extends CursorRecyclerViewAdapter<OwnersRVAdapter.OwnersViewHolder> {
@@ -28,7 +33,8 @@ public class OwnersRVAdapter extends CursorRecyclerViewAdapter<OwnersRVAdapter.O
         OwnersRVAdapter.OwnersViewHolder ovh = new OwnersRVAdapter.OwnersViewHolder(v);
         return ovh;
     }
-
+    // перед тем как отобразить данные пользователю, мы проверяем, не имеют ли они неприемлимый вид(null, default value), и если да,
+// то пользователь видит, что данных нет
     @Override
     public void onBindViewHolder(OwnersRVAdapter.OwnersViewHolder holder, Cursor cursor) {
         Owner myItem = Owner.fromCursor(cursor);

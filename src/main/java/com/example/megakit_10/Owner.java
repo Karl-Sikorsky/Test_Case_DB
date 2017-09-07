@@ -3,7 +3,10 @@ package com.example.megakit_10;
 import android.database.Cursor;
 
 /**
- * Created by ПОДАРУНКОВИЙ on 05.09.2017.
+ * Created by Kalevych_tech@ukr.net on 05.09.2017.
+ * обычный POJO  для хранения данных, которые будут выгружаться в ReyclerView,
+ * геттеры-сеттеры, есть конструктор, принимающий курсор, в связи с тем, что Адаптер унаследован
+ * от CursorRecyclerViewAdapter
  */
 
 public class Owner {

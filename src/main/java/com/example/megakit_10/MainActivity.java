@@ -19,9 +19,9 @@ import android.widget.TabHost;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+//Класс получился очень большим, в скорейшем времени разнесу его согласно какой-то архитектуре
 public class MainActivity extends Activity implements DialogFragmentEditTableListener, LoaderManager.LoaderCallbacks<Cursor> {
-
+    //константы
     final String LOG_TAG = "myLogs";
 
     final Uri CARS_URI = Uri
@@ -49,10 +49,10 @@ public class MainActivity extends Activity implements DialogFragmentEditTableLis
     final int DELETE_CODE = 3;
 
 
-    EditText edT;
-    String CURRENT_TABLE;
+
+
     Uri CURRENT_URI;
-    //ListView lvContact,lvOwners;
+
     DialogFragment dialogEdit, dialogEditOwners;
     CarsRVAdapter adapter;
     OwnersRVAdapter adapterOwners;
@@ -60,14 +60,14 @@ public class MainActivity extends Activity implements DialogFragmentEditTableLis
             Cursor cursor_RV_Owners;
 
     TabHost.TabSpec tabSpec;
-    /** Called when the activity is first created. */
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //edT = (EditText)findViewById(R.id.editText) ;
 
 
+         //реализация вкладок для удобной навигации между таблицами
         TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
         // инициализация
         tabHost.setup();
@@ -83,7 +83,10 @@ public class MainActivity extends Activity implements DialogFragmentEditTableLis
         tabHost.addTab(tabSpec);
 
         tabHost.setCurrentTabByTag("tag2");
+        //текущее Юри будет изменяться в слушателе ищменения вкладки
         CURRENT_URI = CARS_URI;
+
+        //инициализация Диалогов редактирования Базы
         dialogEdit = new DialogFragmentEditTableCars();
         dialogEditOwners = new DialogFragmentEditTableOwners();
 
