@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewChooseCRUD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/i_want"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.024"
+        app:layout_constraintVertical_bias="0.016"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
+
+    <Spinner
+        android:id="@+id/spinnerCRUD"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:entries="@array/CRUDList"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="14dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline2" />
+
+    <TextView
+        android:id="@+id/textViewID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/in_table_with_id"
+        app:layout_constraintTop_toBottomOf="@+id/textViewChooseCRUD"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="8dp" />
+
+    <Spinner
+        android:id="@+id/spinnerID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="0dp"
+        android:entries="@array/operationList"
+        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintLeft_toRightOf="@+id/textViewID"
+        app:layout_constraintRight_toLeftOf="@+id/editTextID"
+        app:layout_constraintTop_toTopOf="@+id/textViewID" />
+
+    <EditText
+        android:id="@+id/editTextID"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="8dp"
+
+        android:layout_marginLeft="0dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerID"
+        app:layout_constraintLeft_toLeftOf="@+id/editTextFirstname"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCRUD" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/firstname"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewID"
+        android:layout_marginLeft="48dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerTelephone"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:entries="@array/operationList"
+        app:layout_constraintLeft_toLeftOf="@+id/spinnerAge"
+        app:layout_constraintRight_toRightOf="@+id/spinnerAge"
+        app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+    <Spinner
+        android:id="@+id/spinnerMail"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:entries="@array/operationList"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/spinnerTelephone"
+        app:layout_constraintRight_toRightOf="@+id/spinnerTelephone"
+        app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+    <Spinner
+        android:id="@+id/spinnerAge"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:entries="@array/operationList"
+        app:layout_constraintLeft_toLeftOf="@+id/spinnerLastname"
+        app:layout_constraintRight_toRightOf="@+id/spinnerLastname"
+        app:layout_constraintTop_toTopOf="@+id/textView7" />
+
+    <Spinner
+        android:id="@+id/spinnerLastname"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:entries="@array/operationList"
+        app:layout_constraintLeft_toLeftOf="@+id/spinnerFirstname"
+        app:layout_constraintRight_toRightOf="@+id/spinnerFirstname"
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+    <Spinner
+        android:id="@+id/spinnerFirstname"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="0dp"
+        android:entries="@array/operationList"
+        app:layout_constraintLeft_toRightOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="@+id/textView5" />
+
+    <EditText
+        android:id="@+id/editTextFirstname"
+        android:layout_width="147dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+
+        app:layout_constraintLeft_toRightOf="@+id/spinnerFirstname"
+        android:layout_marginLeft="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerFirstname"
+        android:layout_marginBottom="0dp"
+        tools:layout_editor_absoluteY="99dp" />
+
+    <EditText
+        android:id="@+id/editTextAge"
+        android:layout_width="143dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toRightOf="@+id/editTextLastname"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/editTextLastname"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerAge"
+        android:layout_marginBottom="0dp"
+        tools:layout_editor_absoluteY="196dp" />
+
+    <EditText
+        android:id="@+id/editTextTelephone"
+        android:layout_width="139dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/editTextAge"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toRightOf="@+id/editTextAge"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerTelephone"
+        android:layout_marginBottom="0dp"
+        tools:layout_editor_absoluteY="243dp" />
+
+    <EditText
+        android:id="@+id/editTextMail"
+        android:layout_width="141dp"
+        android:layout_height="41dp"
+        android:layout_marginRight="0dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+
+        app:layout_constraintRight_toRightOf="@+id/editTextTelephone"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/editTextTelephone"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerMail"
+        android:layout_marginBottom="0dp"
+        tools:layout_editor_absoluteY="290dp"
+        app:layout_constraintHorizontal_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editTextLastname"
+        android:layout_width="137dp"
+        android:layout_height="41dp"
+        android:layout_marginRight="0dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+
+        app:layout_constraintRight_toRightOf="@+id/editTextFirstname"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/editTextFirstname"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerLastname"
+        android:layout_marginBottom="0dp"
+        tools:layout_editor_absoluteY="145dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="31dp"
+        android:text="@string/lastname"
+        app:layout_constraintRight_toRightOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/age"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toRightOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/telephon"
+        android:layout_marginTop="31dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toRightOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mail"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toRightOf="@+id/textView8" />
+
+    <Button
+        android:id="@+id/buttonDone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/done"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerMail" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline2"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="301dp" />
+
+</android.support.constraint.ConstraintLayout>
